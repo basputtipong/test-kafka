@@ -1,0 +1,123 @@
+---
+### Application specific setup
+app:
+  name: orchestrator-notification-consumer
+  port: 1323
+
+logger:
+  global:
+    level: debug
+    reportCaller: true
+    infra: gcp
+
+### Database connection
+db:
+  transfers:
+    database: transfers
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: root
+  faceVerificationResult:
+    database: faceVer
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: root
+
+### Kafka connection
+kafka:
+  topics:
+    faceReflect:
+      name: my-second-topic
+      group: test-kafka-group-test
+      timeout: 10s
+      retry: 3
+      minbytes: 10e3
+      maxbytes: 10e6
+    faceLead:
+      name: my-topic
+      group: test-kafka-group
+      timeout: 10s
+      retry: 3
+      minbytes: 10e3
+      maxbytes: 10e6
+  username:
+  password:
+  scram:
+    mode: false
+    algorithm: "SCRAM-SHA-512"
+  scusername: "scsmsg_nextmsusr"
+  scpassword: "HfKgjjQxPfAJagB"
+  addr: localhost:9092
+  certpath: "./certs"
+  certs: ca.crt,msg.crt
+
+### Security config
+GCP:
+  Storage:
+    ErrorMapping:
+      Token: |
+        {
+          "type": "service_account",
+          "project_id": "subtle-osprey-313110",
+          "private_key_id": "05ba347fca70f8c4e4339aa92b4f72a3e3bfa4d4",
+          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCYnrMCvngy0DMi\nXLXxGDiL9a34nZPxy0/NmJiD1oNISqp0/r613gSc+k3pwohyPDmhssntfh1tq7GC\nnRETeOonZnQXc0UU9d2f0Ni3XkhbHAhW3g2DydRczE5rvHL6iDOOEsVzPKs29ekl\n1XMAEm9GCGWJjGN8VSk8y1Sg7Z2Fqbd/elKAaMlE6IIw/9fE8qmzdVRWio5kLeXE\nrxf/H7FhEJ+qzuRAc0RE+Hi1571PFE4FgXtb/bc8sc5OAWjmqVNLsAkup6/ZedEI\ns3buC3Upy36IiwB9R4YJwwabrW7pM6JnHCgT3F6UpLudLdsKThc9t+t3qh0jlhft\n2jL23wl7AgMBAAECggEABdxT9+PK+bEfePzURlh7QtZYkEIg1TBfR8k3iqyCVoJD\ngQI0J1C3nsa2u11ZFwFYC8h7CeIFsWunXQcCCcoHqiM8ZwSzOqIKGQZ+SIl8iRqO\nsEfYNgO1vbvzlYv1hzYTTnUB7w2P3Cim3x/8t3eiVBzskvdmW3b7uQzaGr5+TvpE\nVDgacR3Z2UYdqJI79fU4nKj8lNUaHy2TpJQRTV3fX3LrL3vJqf7CC1yaMKN+zqt7\nqrUgIOAxs20ib/b+E/k77Ry03lL0KUwVqbmEgDdHCEWjsBM7qcZpDBelKJNxNa1G\nXQ7y7lLWyJobGR8bFjQgdlPFbNso/6kQuhqghMVlWQKBgQDMKoeQPTh+ZSRGvls/\nZaIkpQXTTCArehRxFVpan8Jbhn8ezPxVZZnrZV8/lOAdQJaYQge1Q3HN3+l1ZFCL\n69VMlMAgT2Y6Hg4jzJ5ou1jXFchvYuvD+Xz1DENAetMNnOxy5xA3UU6e/3KOUDHF\na1NDRME97m1miNmWH7nIvI5lQwKBgQC/XgBQsDhiCib35j1zyI6uCKCY2t7dGUG/\nvZRx5MN4QvMuERnMwsGCzNSNJjwxPepLP2cHp/b1s8W5QYzZVfRkPD0Y8pJygJew\nveJNSTkKbgMMeRuxGlVkepz29GAaG+N+OpMSs03c4LFeRYujRIMPxLZimrIb40P2\nYlRvBsHraQKBgFCC5PqoacLON8P+BRW3Cn3Q5b8xYe5DMhR2Cy95mLdnDnIi+87h\nRhVh4HG+T7K5aamZQFjmw9Yf2nyElo7W7UJJ1onnRbTdbU4Ivt8mIh6PZH8oTzj1\nBaXMtCiVRu0zWLrnC6oE0jA5I/+i+D2V2TvJvTqi71lj1goxcJ4MXUrpAoGAdQ/x\nrWo+82o2cEr9qIg1D6zjYN3ymtnKaJp15j4EfNqnm7SGTcWNTpAyLa4IAC9Z1XIR\nepN69M5l02+P05tLBs36qfopL7YOFOXzO0fhhsnJP6YOFIaBWhfPURood5A714nJ\nUhUxOj6RAZQVWWidq9WvpB3xejHJ7zwzXj+J/JECgYEAwN664qHdDnyB9qiDQHaf\nlGsj9ocOhFf8tU8nzNzrF5fhVW7vGrgTM1Nh47JUxNjdi9dE/5IsXps1be0dCVCQ\nyYZXgDhInqz8U2NDnhaSKBBmsdBhXjXpcBhMj6vz9Rrt/sCYWY/bsvRWy9k1IZT5\n0aqmP9onezxaZRXjrPoKCYU=\n-----END PRIVATE KEY-----\n",
+          "client_email": "gcs-service-account@subtle-osprey-313110.iam.gserviceaccount.com",
+          "client_id": "112655136766972811870",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gcs-service-account%40subtle-osprey-313110.iam.gserviceaccount.com"
+        }
+      bucket: 'buck'
+      file: 'file'
+  SECRET:
+    JWT:
+      TOKEN: "1234567890"
+    APIGEE:
+      JWT:
+        PUBLIC:
+          KEY: |
+            -----BEGIN PUBLIC KEY-----
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAptmkfyIhAHcDiLvg7TcK
+            y0ccdeEjmh4PY9KcYj04LiBflTXWJEX2Iu5QlMiE0eZ1TaRqN9Q4AsbYAqbsWens
+            v3UdLKqCWYBUnI2iGcyLMfTFRspIXti4uSMKAHPtJ2X+LNwvp3tjZLC+veeVL1yc
+            xLvkyOWJl2ZeXk4K16DCXB/DOkPBbx3AhzH6C9sCFOQjYKTiuw2oTzui6lbMfrzv
+            tzTkY8IdhgLgg2UbVzUq1q0qyFg0e6BnxGQ7p8FGWeoGKbAQ82o2L7yMHGCWnZSa
+            9WxeYLEMHGY+6vGORJ4KvcewSwnsuWZSEiidA1pA8PimgCmatUliVpChRjGcaG9O
+            pQIDAQAB
+            -----END PUBLIC KEY-----
+
+    INTERNAL:
+      JWT:
+        PUBLIC:
+          KEY: |
+            -----BEGIN PUBLIC KEY-----
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAptmkfyIhAHcDiLvg7TcK
+            y0ccdeEjmh4PY9KcYj04LiBflTXWJEX2Iu5QlMiE0eZ1TaRqN9Q4AsbYAqbsWens
+            v3UdLKqCWYBUnI2iGcyLMfTFRspIXti4uSMKAHPtJ2X+LNwvp3tjZLC+veeVL1yc
+            xLvkyOWJl2ZeXk4K16DCXB/DOkPBbx3AhzH6C9sCFOQjYKTiuw2oTzui6lbMfrzv
+            tzTkY8IdhgLgg2UbVzUq1q0qyFg0e6BnxGQ7p8FGWeoGKbAQ82o2L7yMHGCWnZSa
+            9WxeYLEMHGY+6vGORJ4KvcewSwnsuWZSEiidA1pA8PimgCmatUliVpChRjGcaG9O
+            pQIDAQAB
+            -----END PUBLIC KEY-----
+  PUBSUB:
+    TOKEN: |
+      {
+        "type": "service_account",
+        "project_id": "flawless-agency-291709",
+        "private_key_id": "7714c4b5669a3e089fa57776746907055d9bf351",
+        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZOFmebNoxI8C1\nPHPLWYLlNheGuuT4Qh7LOiMuzm0X5gqZQ/3hRKSQ6ZrCmxDyI44UYnbT3h4C+loC\nQW/4vfGp2EF5ZlkiMNhAv2iNJBveyjjT2aBvpmfFg2ED35M6j4tkroctlewzBdJA\nxsx61e4GtJJsqmLicWDwGtYWc9o6Ord+P6RnRkgsQ8PdxFbfqWtxJc3ZO5n6bdND\nYpEfl61GmOONOgAgSXt7LoMjKVoTA2NAWdXU/ngZHwhQ6FqFVnsWhSBWsasBD7+8\nA1Z/OUpCSaYckVe/M1nltzlfaYP8/cWOaAKqDN0JyMbMn1Hf6+ltoHVncMpOwqMf\nzwI48wtHAgMBAAECggEASzhavGQ4aJTXaks9U/kyvTnuiq7UlG2dKUYAIfjEyWZV\nXD6xv1zcWfwzJdm51Afg7wkr2fFMVj6ohahwZGQuN+EVxzrced0NPdqqk1miNxOy\n+xWdG5y1ya1VnphA7SIBJMPVNsF4cjC9XsYY0B6d1v+Xxv530K9vYKYCZfMHamsA\nVEp1junwFYMcFzno96oL5NU58+FzKF+ae1ErAR3EldItrQKVvz8M5qBB/cz7pPmh\nvLG7fsoAh8z7ECkXqoaV6UILEcHUCSZ2qhGDNVt87RI/nz/TQ4tAi03ogCXFIjxO\nevdvlYLPBIOyKgmCmoemGiZbZ2h8l6wzPI7Wdj2+WQKBgQD3rkrTi6rINa313dqi\nn9+RygSlaWuWKemSC0QElMl/F4uvWAQYQYtRApFiDLPwrxM8OAsziThlSwmfZjkk\nOYLVxdBG8XLRLN2DJ3ARjjm63boMrRTO0/Pd2E9EGDEI9vFGdwozI6/CyM5AEbFN\ne76FzYzdwtkyJjSHtTSwefDZiQKBgQDghCNteAZ4fCcSH39ljTL7TC/JBXxh8GW4\ngNdtzlCRFSBluG/FRoGzt1X+m+M245xVAdO19Q6EcdPt7ppBXF3NMVkKgxPL5HIK\nOCGpoWnuCgpcPXWGJT1aA3aLsy5WIDVbVdwtYJTmatfJZNkbiyopWRtxXEDIDAeX\nSDg/m0gaTwKBgQDqWu2MSzxWYoxu9vPYKsQFk4xf42ccWB4cxTIfz5T0/5d5WyPM\nu8AR8AcWKoTceRwPP8xBgFZvadf6DmSFBTHqCllvtyh4Ciay4c8lnVi8mu5e7iqh\nJWY7hGBEQ0uqetaDYUGyb9Lv0MdvUg5dDXiR7JOchbCzxfiwa+ImFcuyWQKBgDS2\ncYbzJjnFlHrJ0GRsaWrc8V82HYT1JzzRa0MJrJrTpf6b9goQSsWCJvuXaBpsCDlh\nK27OMXFhNEvpuGfeItvZWTmBmvVFFo1VrnmgPzm3O8V6XIx5U9U9eOjF0fxApaZj\nG0XAJlWPAkjzl5HC88wvcqUD7uXJBUM8npA4ig47AoGBALbyWkebU9iPndgKKHqn\n5QiuzB9caBNJStmlErlW77bUcN9C0UuUTtzXGGc+nGyulNlEM9s0nqFV2rIhKOBa\nT0GFiugTp6H/VIUhiJXg0ZBsCGa2RegKikTNyLTYgPCa/ELESfi4CsAF1yxY5ovY\n1R33iJne5WDeu83NJMuC00Bk\n-----END PRIVATE KEY-----\n",
+        "client_email": "pubsub@flawless-agency-291709.iam.gserviceaccount.com",
+        "client_id": "115832675093527954956",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pubsub%40flawless-agency-291709.iam.gserviceaccount.com"
+      }
+
+pubsub:
+  projectId: projectId
+  topicId: topicId
+
